@@ -10,11 +10,11 @@ public class DatabaseConnection {
 
     // Configuration de la base de données
     private final String URL = "jdbc:mysql://localhost:3306/TP2";
-    private final String USER = "root";
-    private final String PASSWORD = "12345";
+    private final String USER = "jordan";
+    private final String PASSWORD = "123456";
 
     // Constructeur privé
-    private DatabaseConnection() {
+    public DatabaseConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(URL, USER, PASSWORD);

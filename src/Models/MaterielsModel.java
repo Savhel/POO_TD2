@@ -2,19 +2,34 @@ package Models;
 
 public abstract class MaterielsModel {
 
-
-
-    private Integer Id;
     private String Nom;
     private String Marque;
     private String Modele;
     private float memoire_ROM;
     private float memoire_RAM;
     private String numero_serie;
-    private String etat ;
     private Integer IdPropretaire;
+    private String Couleur;
+    private String etat_Materiel;
 
-    public Integer getIdPropretaire() {
+
+    public String getEtat_Materiel() {
+        return etat_Materiel;
+    }
+
+    public String getCouleur() {
+        return Couleur;
+    }
+
+    public void setEtat_Materiel(String etat_Materiel) {
+        this.etat_Materiel = etat_Materiel;
+    }
+
+    public void setCouleur(String couleur) {
+        Couleur = couleur;
+    }
+
+    public String getIdPropretaire() {
         return IdPropretaire;
     }
 
@@ -33,12 +48,7 @@ public abstract class MaterielsModel {
     public String getNumero_serie() {
         return numero_serie;
     }
-    public String getEtat() {
-        return etat;
-    }
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
+
     public void setMemoire_RAM(float memoire_RAM) {
         this.memoire_RAM = memoire_RAM;
     }
@@ -75,7 +85,7 @@ public abstract class MaterielsModel {
         Marque = marque;
     }
 
-    public Integer getId() {
+    public String getId() {
         return Id;
     }
 
