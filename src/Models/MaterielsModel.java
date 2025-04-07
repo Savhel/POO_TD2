@@ -85,4 +85,15 @@ public abstract class MaterielsModel {
         Marque = marque;
     }
 
+    public MaterielsModel(String nom, String marque, String modele, float memoire_ROM, float memoire_RAM, String numero_serie, Integer idPropretaire, String couleur, String etat_Materiel) {
+        Nom = nom;
+        Marque = marque;
+        Modele = modele;
+        this.memoire_ROM = memoire_ROM;
+        this.memoire_RAM = memoire_RAM;
+        this.numero_serie = numero_serie;
+        IdPropretaire = idPropretaire;
+        Couleur = couleur;
+        this.etat_Materiel = etat_Materiel;
+    }
 }
