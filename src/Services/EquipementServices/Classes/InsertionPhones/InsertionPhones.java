@@ -15,20 +15,18 @@ public class InsertionPhones implements InsertionInterface {
             String requete="insert into Phones(IMEI,IdProprietaire,Nom,Marque,Modele,memoire_ROM,memoire_RAM,numero_serie) VALUES (?,?,?,?,?,?,?,?)";
             try(PreparedStatement stmt=con.getConnection().prepareStatement(requete)){
                 stmt.setString(1,p.getIMEI());
-                stmt.setString(2,p.getI);
-                stmt.setDate(3, Date.valueOf(getDateNaissance()));
-                stmt.setString(4,getAddress());
-                stmt.setString(5,getEmail());
-                stmt.setString(6,getTelNUmber());
-                stmt.setString(7,getCycle());
-                stmt.setInt(8,getNiveau());
+                stmt.setInt(2,p.getIdProprietaire());
+                stmt.setString(3,p.getEtat_Materiel());
+                stmt.setString(4,p.getCouleur());
+                stmt.setString(5,p.getNom());
+                stmt.setString(6,p.getMarque());
+                stmt.setString(7, p.getModele());
+                stmt.setFloat(8,p.getMemoire_ROM());
+                stmt.setFloat(9,p.getMemoire_RAM());
                 stmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
-
     }
 
 }

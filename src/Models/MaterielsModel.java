@@ -16,7 +16,6 @@ public abstract class MaterielsModel {
 
     }
 
-
     public String getEtat_Materiel() {
         return etat_Materiel;
     }
