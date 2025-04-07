@@ -1,5 +1,6 @@
 package Services.EquipementServices.Classes.InsertionPhones;
 
+import Models.MaterielsModel;
 import Models.PhonesModel;
 import Services.DatabaseServices.DatabaseConnection;
 import Services.EquipementServices.Interfaces.InsertionInterfaces.InsertionInterface;
@@ -9,7 +10,8 @@ import java.sql.SQLException;
 
 public class InsertionPhones implements InsertionInterface {
     @Override
-    public void Insertion(PhonesModel p) {
+    public void Insertion(MaterielsModel m) throws SQLException {
+        PhonesModel p= (PhonesModel)m;
         DatabaseConnection con=new DatabaseConnection();
             String requete="insert into Phones(IMEI,IdProprietaire,Nom,Marque,Modele,memoire_ROM,memoire_RAM,numero_serie) VALUES (?,?,?,?,?,?,?,?)";
             try(PreparedStatement stmt=con.getConnection().prepareStatement(requete)){
@@ -27,5 +29,4 @@ public class InsertionPhones implements InsertionInterface {
                 e.printStackTrace();
             }
     }
-
 }
