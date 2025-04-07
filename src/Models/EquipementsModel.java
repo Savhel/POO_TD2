@@ -1,6 +1,6 @@
 package Models;
 
-public class EquipementsModel {
+public class EquipementsModel extends MaterielsModel{
     private String address_MAC;
 
     //setter
