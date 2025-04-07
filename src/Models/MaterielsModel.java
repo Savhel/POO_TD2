@@ -1,6 +1,10 @@
 package Models;
 
 public abstract class MaterielsModel {
+
+
+
+    private Integer Id;
     private String Nom;
     private String Marque;
     private String Modele;
@@ -64,5 +68,13 @@ public abstract class MaterielsModel {
 
     public void setMarque(String marque) {
         Marque = marque;
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
     }
 }
