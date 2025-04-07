@@ -16,6 +16,7 @@ CREATE TABLE Users (
 CREATE TABLE Phones (
     id_phone INT AUTO_INCREMENT PRIMARY KEY,
     IdProprietaire INT,
+    Couleur VARCHAR(100),
     Nom VARCHAR(100),
     Marque VARCHAR(100),
     Modele VARCHAR(100),
