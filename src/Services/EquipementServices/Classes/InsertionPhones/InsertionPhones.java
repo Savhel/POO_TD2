@@ -12,9 +12,8 @@ public class InsertionPhones implements InsertionInterface {
     @Override
     public void Insertion(MaterielsModel m) throws SQLException {
         PhonesModel p= (PhonesModel)m;
-        DatabaseConnection con=new DatabaseConnection();
             String requete="insert into Phones(IMEI,IdProprietaire,Nom,Marque,Modele,memoire_ROM,memoire_RAM,numero_serie) VALUES (?,?,?,?,?,?,?,?)";
-            try(PreparedStatement stmt=con.getConnection().prepareStatement(requete)){
+            try(PreparedStatement stmt=DatabaseConnection.getInstance().getConnection().prepareStatement(requete)){
                 stmt.setString(1,p.getIMEI());
                 stmt.setInt(2,p.getIdProprietaire());
                 stmt.setString(3,p.getEtat_Materiel());

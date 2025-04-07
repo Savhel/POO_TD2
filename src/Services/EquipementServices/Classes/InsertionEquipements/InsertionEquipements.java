@@ -12,9 +12,8 @@ public class InsertionEquipements implements InsertionInterface {
     @Override
     public void Insertion(MaterielsModel m) throws SQLException {
         EquipementsModel e=(EquipementsModel)m;
-        DatabaseConnection con = new DatabaseConnection();
         String requet = "insert into Equipements(address_MAC,IdProprietaire,etat_Materiel,Nom,Marque,Modele,memoire_ROM,memoi_RAM,numero_serie) values (?,?,?,?,?,?,?,?,?)";
-        try (PreparedStatement stmt = con.getConnection().prepareStatement(requet)) {
+        try (PreparedStatement stmt = DatabaseConnection.getInstance().getConnection().prepareStatement(requet)) {
             stmt.setString(1,e.getAddress_MAC());
             stmt.setInt(2,e.getIdProprietaire());
             stmt.setString(3,e.getCouleur());
