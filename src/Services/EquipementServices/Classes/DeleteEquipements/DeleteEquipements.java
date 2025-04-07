@@ -27,7 +27,7 @@ public class DeleteEquipements implements DeleteInterface {
         try{
             sql = "DELETE FROM Agents where Code = ?";
             pst = connection.prepareStatement(sql);
-            pst.setInt(1,equipement.getId());
+            pst.setString(1,equipement.getAddress_MAC());
             pst.executeUpdate();
             return (equipement.getNom() + " a été supprimé avec success");
         }catch (Exception e){
