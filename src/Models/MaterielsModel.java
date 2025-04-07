@@ -33,8 +33,8 @@ public abstract class MaterielsModel {
         return IdProprietaire;
     }
 
-    public void setIdPropretaire(Integer idPropretaire) {
-        IdProprietaire = idPropretaire;
+    public void setIdProprietaire(Integer idProprietaire) {
+        IdProprietaire = idProprietaire;
     }
 
     public float getMemoire_RAM() {
