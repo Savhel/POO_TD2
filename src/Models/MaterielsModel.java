@@ -11,7 +11,7 @@ public abstract class MaterielsModel {
     private float memoire_ROM;
     private float memoire_RAM;
     private String numero_serie;
-
+    private String etat ;
     private Integer IdPropretaire;
 
     public Integer getIdPropretaire() {
@@ -33,7 +33,12 @@ public abstract class MaterielsModel {
     public String getNumero_serie() {
         return numero_serie;
     }
-
+    public String getEtat() {
+        return etat;
+    }
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
     public void setMemoire_RAM(float memoire_RAM) {
         this.memoire_RAM = memoire_RAM;
     }
