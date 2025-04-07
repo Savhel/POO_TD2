@@ -85,11 +85,4 @@ public abstract class MaterielsModel {
         Marque = marque;
     }
 
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(Integer id) {
-        Id = id;
-    }
 }
