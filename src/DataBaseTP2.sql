@@ -15,6 +15,7 @@ CREATE TABLE Users (
 -- Table des téléphones
 CREATE TABLE Phones (
     id_phone INT AUTO_INCREMENT PRIMARY KEY,
+    IdPropretaire INT,
     Nom VARCHAR(100),
     Marque VARCHAR(100),
     Modele VARCHAR(100),
@@ -27,6 +28,7 @@ CREATE TABLE Phones (
 -- Table des équipements
 CREATE TABLE Equipements (
     id_equipement INT AUTO_INCREMENT PRIMARY KEY,
+    IdPropretaire INT,
     address_MAC VARCHAR(100) UNIQUE,
     Nom VARCHAR(100),
     Marque VARCHAR(100),
