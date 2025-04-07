@@ -5,6 +5,10 @@ public class EquipementsModel {
 
     //setter
 
+    public EquipementsModel(String address_MAC) {
+        this.address_MAC = address_MAC;
+    }
+
     public void setAddress_MAC(String address_MAC) {
         this.address_MAC = address_MAC;
     }

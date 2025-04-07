@@ -46,4 +46,12 @@ public class UsersModel {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public UsersModel(String nom, String prenom, String email, String numtel, String address) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.numtel = numtel;
+        this.address = address;
+    }
 }
