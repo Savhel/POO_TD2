@@ -14,8 +14,8 @@ public class InsertionPhones implements InsertionInterface {
         DatabaseConnection con=new DatabaseConnection();
             String requete="insert into Phones(id_phone,IdPropretaire,Nom,Marque,Modele,memoire_ROM,memoire_RAM,numero_serie,IMEI) VALUES (?,?,?,?,?,?,?,?,?)";
             try(PreparedStatement stmt=con.getConnection().prepareStatement(requete)){
-                stmt.setString(1,p.());
-                stmt.setString(2,p.());
+                stmt.setString(1,p.getId());
+                stmt.setString(2,p.getIdProprietaire());
                 stmt.setDate(3, Date.valueOf(getDateNaissance()));
                 stmt.setString(4,getAddress());
                 stmt.setString(5,getEmail());
