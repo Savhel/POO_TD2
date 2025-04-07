@@ -1,6 +1,5 @@
 package Services.EquipementServices.Classes.ReadPhones;
 
-import Models.EquipementsModel;
 import Models.PhonesModel;
 import Services.DatabaseServices.DatabaseConnection;
 import Services.EquipementServices.Interfaces.ReadInterfaces.ReadInterface;
