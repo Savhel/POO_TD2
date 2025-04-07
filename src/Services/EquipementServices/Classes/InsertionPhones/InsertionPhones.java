@@ -12,10 +12,10 @@ public class InsertionPhones implements InsertionInterface {
     @Override
     public void Insertion(PhonesModel p) {
         DatabaseConnection con=new DatabaseConnection();
-            String requete="insert into Phones(id_phone,IdPropretaire,Nom,Marque,Modele,memoire_ROM,memoire_RAM,numero_serie,IMEI) VALUES (?,?,?,?,?,?,?,?,?)";
+            String requete="insert into Phones(IMEI,IdProprietaire,Nom,Marque,Modele,memoire_ROM,memoire_RAM,numero_serie) VALUES (?,?,?,?,?,?,?,?)";
             try(PreparedStatement stmt=con.getConnection().prepareStatement(requete)){
-                stmt.setString(1,p.());
-                stmt.setString(2,p.());
+                stmt.setString(1,p.getIMEI());
+                stmt.setString(2,p.getI);
                 stmt.setDate(3, Date.valueOf(getDateNaissance()));
                 stmt.setString(4,getAddress());
                 stmt.setString(5,getEmail());
