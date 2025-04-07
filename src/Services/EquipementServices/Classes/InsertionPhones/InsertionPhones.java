@@ -4,7 +4,6 @@ import Models.PhonesModel;
 import Services.DatabaseServices.DatabaseConnection;
 import Services.EquipementServices.Interfaces.InsertionInterfaces.InsertionInterface;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
