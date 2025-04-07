@@ -29,7 +29,7 @@ public abstract class MaterielsModel {
         Couleur = couleur;
     }
 
-    public String getIdPropretaire() {
+    public Integer getIdPropretaire() {
         return IdPropretaire;
     }
 
@@ -84,5 +84,4 @@ public abstract class MaterielsModel {
     public void setMarque(String marque) {
         Marque = marque;
     }
-
 }
