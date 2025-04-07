@@ -9,6 +9,7 @@ public class EquipementsModel extends MaterielsModel{
 
 
     public EquipementsModel(String address_MAC) {
+        super();
         this.address_MAC = address_MAC;
     }
 
