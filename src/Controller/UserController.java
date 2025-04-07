@@ -2,7 +2,7 @@ package controller;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import service.UserService;
+import services.UserService;
 import model.User;
 import java.io.IOException;
 import java.io.OutputStream;
