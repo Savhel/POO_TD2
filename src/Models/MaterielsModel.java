@@ -29,12 +29,12 @@ public abstract class MaterielsModel {
         Couleur = couleur;
     }
 
-    public Integer getIdProprietaire() {
-        return IdProprietaire;
+    public String getIdPropretaire() {
+        return IdPropretaire;
     }
 
-    public void setIdProprietaire(Integer idPropretaire) {
-        IdProprietaire = idPropretaire;
+    public void setIdPropretaire(Integer idPropretaire) {
+        IdPropretaire = idPropretaire;
     }
 
     public float getMemoire_RAM() {
