@@ -7,6 +7,6 @@ import Models.PhonesModel;
 import java.sql.SQLException;
 
 public interface InsertionInterface {
-    public void Insertion(MaterielsModel m) throws SQLException;
+    public void Insertion() throws SQLException;
 
 }
