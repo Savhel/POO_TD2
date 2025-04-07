@@ -16,6 +16,7 @@ CREATE TABLE Users (
 CREATE TABLE Phones (
     id_phone INT AUTO_INCREMENT PRIMARY KEY,
     IdProprietaire INT,
+    etat_Materiel String,
     Couleur VARCHAR(100),
     Nom VARCHAR(100),
     Marque VARCHAR(100),
@@ -30,6 +31,7 @@ CREATE TABLE Phones (
 CREATE TABLE Equipements (
     id_equipement INT AUTO_INCREMENT PRIMARY KEY,
     IdProprietaire INT AUTO_INCREMENT ,
+    etat_Materiel String,
     address_MAC VARCHAR(100) UNIQUE,
     Nom VARCHAR(100),
     Marque VARCHAR(100),
