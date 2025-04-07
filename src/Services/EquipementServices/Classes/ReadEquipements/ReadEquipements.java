@@ -29,7 +29,7 @@ public class ReadEquipements implements ReadInterface {
         try{
             sql = "SELECT * FROM Agents where Code = ?";
             pst = connection.prepareStatement(sql);
-            pst.setInt(1,equipement.getId());
+            pst.setString(1,equipement.getAddress_MAC());
             pst.executeUpdate();
             return Collections.singletonList("");
         }catch (Exception e){
