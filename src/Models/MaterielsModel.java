@@ -8,7 +8,7 @@ public abstract class MaterielsModel {
     private float memoire_ROM;
     private float memoire_RAM;
     private String numero_serie;
-    private Integer IdPropretaire;
+    private Integer IdProprietaire;
     private String Couleur;
     private String etat_Materiel;
 
@@ -92,7 +92,7 @@ public abstract class MaterielsModel {
         this.memoire_ROM = memoire_ROM;
         this.memoire_RAM = memoire_RAM;
         this.numero_serie = numero_serie;
-        IdPropretaire = idPropretaire;
+        IdProprietaire = idPropretaire;
         Couleur = couleur;
         this.etat_Materiel = etat_Materiel;
     }
