@@ -14,23 +14,24 @@ CREATE TABLE Users (
 
 -- Table des téléphones
 CREATE TABLE Phones (
-    id_phone INT AUTO_INCREMENT PRIMARY KEY,
+    IMEI VARCHAR(100) PRIMARY KEY,
     IdProprietaire INT,
+    etat_Materiel VARCHAR(100),
     Couleur VARCHAR(100),
     Nom VARCHAR(100),
     Marque VARCHAR(100),
     Modele VARCHAR(100),
     memoire_ROM FLOAT,
     memoire_RAM FLOAT,
-    numero_serie VARCHAR(100) UNIQUE,
-    IMEI VARCHAR(100) UNIQUE
+    numero_serie VARCHAR(100) UNIQUE
 );
 
 -- Table des équipements
 CREATE TABLE Equipements (
-    id_equipement INT AUTO_INCREMENT PRIMARY KEY,
-    IdProprietaire INT AUTO_INCREMENT ,
-    address_MAC VARCHAR(100) UNIQUE,
+    address_MAC VARCHAR(100) PRIMARY KEY,
+    IdProprietaire INT,
+    Couleur VARCHAR(100),
+    etat_Materiel VARCHAR(100),
     Nom VARCHAR(100),
     Marque VARCHAR(100),
     Modele VARCHAR(100),

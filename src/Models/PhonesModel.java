@@ -1,6 +1,6 @@
 package Models;
 
-public class PhonesModel {
+public class PhonesModel extends MaterielsModel{
     private String IMEI;
 
     public PhonesModel(String IMEI) {

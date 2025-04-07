@@ -12,6 +12,9 @@ public abstract class MaterielsModel {
     private String Couleur;
     private String etat_Materiel;
 
+    public MaterielsModel() {
+
+    }
 
     public String getEtat_Materiel() {
         return etat_Materiel;
@@ -33,8 +36,8 @@ public abstract class MaterielsModel {
         return IdProprietaire;
     }
 
-    public void setIdProprietaire(Integer idPropretaire) {
-        IdProprietaire = idPropretaire;
+    public void setIdProprietaire(Integer idProprietaire) {
+        IdProprietaire = idProprietaire;
     }
 
     public float getMemoire_RAM() {
@@ -85,4 +88,15 @@ public abstract class MaterielsModel {
         Marque = marque;
     }
 
+    public MaterielsModel(String nom, String marque, String modele, float memoire_ROM, float memoire_RAM, String numero_serie, Integer idPropretaire, String couleur, String etat_Materiel) {
+        Nom = nom;
+        Marque = marque;
+        Modele = modele;
+        this.memoire_ROM = memoire_ROM;
+        this.memoire_RAM = memoire_RAM;
+        this.numero_serie = numero_serie;
+        IdProprietaire = idPropretaire;
+        Couleur = couleur;
+        this.etat_Materiel = etat_Materiel;
+    }
 }

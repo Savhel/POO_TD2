@@ -1,11 +1,20 @@
 package Models;
 
 public class UsersModel {
+    private Integer id;
     private String nom;
     private String prenom;
     private String email ;
     private String numtel ;
     private String address;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNom() {
         return nom;
