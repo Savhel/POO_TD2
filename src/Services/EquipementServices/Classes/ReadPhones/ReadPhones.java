@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class ReadPhones implements ReadInterface {
     PhonesModel phone;
     Connection connection;
-    PhonesModel equipement;
     PreparedStatement pst;
     ResultSet rsl;
     String sql;
@@ -32,7 +31,7 @@ public class ReadPhones implements ReadInterface {
             // Requête SQL paramétrée
             sql = "SELECT * FROM Agents WHERE Code = ?";
             pst = connection.prepareStatement(sql);
-            pst.setString(1, equipement.getIMEI());
+            pst.setString(1, phone.getIMEI());
 
             // Exécution de la requête
             rsl = pst.executeQuery();
