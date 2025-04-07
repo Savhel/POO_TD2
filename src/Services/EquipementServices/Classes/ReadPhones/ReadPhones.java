@@ -1,4 +1,4 @@
-package Services.EquipementServices.Classes.ReadEquipements;
+package Services.EquipementServices.Classes.ReadPhones;
 
 import Models.EquipementsModel;
 import Models.PhonesModel;
