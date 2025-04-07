@@ -8,6 +8,8 @@ public abstract class MaterielsModel {
     private float memoire_RAM;
     private String numero_serie;
 
+    private Integer IdPropretaire;
+
 
     public float getMemoire_RAM() {
         return memoire_RAM;
