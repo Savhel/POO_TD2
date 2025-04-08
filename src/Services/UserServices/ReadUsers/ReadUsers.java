@@ -34,7 +34,36 @@ public class ReadUsers {
             e.printStackTrace();
             throw new Exception("Erreur lors de la lecture des users: " + e.getMessage());
         }
+    }
+    
+    public ResultSet findByEmail(String email) throws Exception {
+        try {
+            sql = "SELECT * FROM Users WHERE email = ?";
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, email);
+            rsl = pst.executeQuery();
 
+            return rsl;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Erreur lors de la recherche d'utilisateur par email: " + e.getMessage());
+        }
+    }
+    
+    public ResultSet login(String email, String password) throws Exception {
+        try {
+            sql = "SELECT * FROM Users WHERE email = ? AND password = ?";
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, email);
+            pst.setString(2, password);
+            rsl = pst.executeQuery();
+
+            return rsl;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Erreur lors de l'authentification: " + e.getMessage());
+        }
     }
 }

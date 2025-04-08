@@ -19,29 +19,74 @@ import static java.net.URLDecoder.decode;
 public class UserController {
 //    private final UserService UserService = new UserService();
 
+    // Handler pour l'authentification (login)
+    public static HttpHandler loginUser = exchange -> {
+        if ("POST".equals(exchange.getRequestMethod())) {
+            try {
+                // Lire et parser le corps de la requête
+                String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                String[] params = requestBody.split("&");
+                String email = decode(params[0].split("=")[1], StandardCharsets.UTF_8);
+                String password = decode(params[1].split("=")[1], StandardCharsets.UTF_8);
+                
+                // Appeler le service pour authentifier l'utilisateur
+                ReadUsers readUsers = new ReadUsers();
+                ResultSet userResult = readUsers.login(email, password);
+                
+                // Convertir le résultat en JSON
+                String jsonResponse = ResultSetToJson.usersResultSetToJson(userResult);
+                
+                // Vérifier si un utilisateur a été trouvé
+                if (jsonResponse.equals("[]")) {
+                    sendResponse(exchange, 401, "{\"error\": \"Email ou mot de passe incorrect\"}");
+                } else {
+                    sendResponse(exchange, 200, jsonResponse);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendResponse(exchange, 500, "{\"error\": \"" + e.getMessage() + "\"}");
+            }
+        } else {
+            sendResponse(exchange, 405, "{\"error\": \"Method Not Allowed\"}");
+        }
+    };
+
     public static HttpHandler createUser = exchange -> {
         if ("POST".equals(exchange.getRequestMethod())) {
-            String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
-            // Parse request body (ex: "name=John&age=30")
-            String[] params = requestBody.split("&");
-            String nom = decode(params[0].split("=")[1], StandardCharsets.UTF_8);
-            String prenom = decode(params[1].split("=")[1], StandardCharsets.UTF_8);
-            String email = decode(params[2].split("=")[1], StandardCharsets.UTF_8);
-            String NumTel = decode(params[3].split("=")[1], StandardCharsets.UTF_8);
-            String address = decode(params[4].split("=")[1], StandardCharsets.UTF_8);
+            try {
+                String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                // Parse request body (ex: "name=John&age=30")
+                String[] params = requestBody.split("&");
+                String nom = decode(params[0].split("=")[1], StandardCharsets.UTF_8);
+                String prenom = decode(params[1].split("=")[1], StandardCharsets.UTF_8);
+                String email = decode(params[2].split("=")[1], StandardCharsets.UTF_8);
+                String password = decode(params[3].split("=")[1], StandardCharsets.UTF_8);
+                String NumTel = decode(params[4].split("=")[1], StandardCharsets.UTF_8);
+                String address = decode(params[5].split("=")[1], StandardCharsets.UTF_8);
 
-            UsersModel user = new UsersModel();
-            user.setId(1);
-            user.setNom(nom);
-            user.setPrenom(prenom);
-            user.setEmail(email);
-            user.setNumtel(NumTel);
-            user.setAddress(address);
+                UsersModel user = new UsersModel();
+                user.setNom(nom);
+                user.setPrenom(prenom);
+                user.setEmail(email);
+                user.setPassword(password);
+                user.setNumtel(NumTel);
+                user.setAddress(address);
 
-            InsertionUsers InsertionUsers = new InsertionUsers(user);
-            InsertionUsers.InsertionUser();
+                InsertionUsers insertionUsers = new InsertionUsers(user);
+                int userId = insertionUsers.InsertionUser();
 
-            sendResponse(exchange, 201, STR."Creation of the user\{user.getNom()} was successful");
+                if (userId > 0) {
+                    // Créer une réponse JSON avec l'ID généré
+                    String jsonResponse = String.format("{\"id_user\":%d,\"nom\":\"%s\",\"prenom\":\"%s\",\"email\":\"%s\",\"numtel\":\"%s\",\"address\":\"%s\"}", 
+                        userId, nom, prenom, email, NumTel, address);
+                    sendResponse(exchange, 201, jsonResponse);
+                } else {
+                    sendResponse(exchange, 500, "{\"error\": \"Échec de la création de l'utilisateur\"}");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendResponse(exchange, 500, "{\"error\": \"" + e.getMessage() + "\"}");
+            }
         } else {
             sendResponse(exchange, 405, "Method Not Allowed");
         }

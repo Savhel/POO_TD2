@@ -8,6 +8,7 @@ CREATE TABLE Users (
     nom VARCHAR(100),
     prenom VARCHAR(100),
     email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
     numtel VARCHAR(20),
     address VARCHAR(255)
 );
@@ -23,7 +24,8 @@ CREATE TABLE Phones (
     Modele VARCHAR(100),
     memoire_ROM FLOAT,
     memoire_RAM FLOAT,
-    numero_serie VARCHAR(100) UNIQUE
+    numero_serie VARCHAR(100) UNIQUE,
+    photoUrl VARCHAR(255)
 );
 
 -- Table des équipements
@@ -37,5 +39,6 @@ CREATE TABLE Equipements (
     Modele VARCHAR(100),
     memoire_ROM FLOAT,
     memoire_RAM FLOAT,
-    numero_serie VARCHAR(100) UNIQUE
+    numero_serie VARCHAR(100) UNIQUE,
+    photoUrl VARCHAR(255)
 );

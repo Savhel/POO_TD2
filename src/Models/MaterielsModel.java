@@ -11,6 +11,7 @@ public abstract class MaterielsModel {
     private Integer IdProprietaire;
     private String Couleur;
     private String etat_Materiel;
+    private String photoUrl;
 
     public MaterielsModel() {
 
@@ -89,7 +90,7 @@ public abstract class MaterielsModel {
         Marque = marque;
     }
 
-    public MaterielsModel(String nom, String marque, String modele, float memoire_ROM, float memoire_RAM, String numero_serie, Integer idPropretaire, String couleur, String etat_Materiel) {
+    public MaterielsModel(String nom, String marque, String modele, float memoire_ROM, float memoire_RAM, String numero_serie, Integer idPropretaire, String couleur, String etat_Materiel, String photoUrl) {
         Nom = nom;
         Marque = marque;
         Modele = modele;
@@ -99,5 +100,14 @@ public abstract class MaterielsModel {
         IdProprietaire = idPropretaire;
         Couleur = couleur;
         this.etat_Materiel = etat_Materiel;
+        this.photoUrl = photoUrl;
+    }
+    
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+    
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }
