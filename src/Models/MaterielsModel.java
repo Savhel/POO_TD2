@@ -12,6 +12,10 @@ public abstract class MaterielsModel {
     private String Couleur;
     private String etat_Materiel;
 
+    public MaterielsModel() {
+
+    }
+
 
     public String getEtat_Materiel() {
         return etat_Materiel;

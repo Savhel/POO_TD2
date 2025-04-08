@@ -63,4 +63,7 @@ public class UsersModel {
         this.numtel = numtel;
         this.address = address;
     }
+
+    public UsersModel() {
+    }
 }
