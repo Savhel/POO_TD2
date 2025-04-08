@@ -125,8 +125,8 @@ public class UserController {
                 user.setAddress(address);
                 
                 // Call service to update the user
-                UpdateUsers updateUsers = new UpdateUsers();
-                boolean success = updateUsers.updateUser(user);
+                UpdateUsers updateUsers = new UpdateUsers(user);
+                boolean success = updateUsers.updateUser();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"User updated successfully\"}");
