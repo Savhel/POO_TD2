@@ -7,6 +7,8 @@ public class EquipementsModel extends MaterielsModel{
     //setter
 
 
+    public EquipementsModel() {
+    }
 
     public EquipementsModel(String address_MAC) {
         this.address_MAC = address_MAC;

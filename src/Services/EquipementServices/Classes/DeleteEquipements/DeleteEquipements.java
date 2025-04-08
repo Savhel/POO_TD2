@@ -25,7 +25,7 @@ public class DeleteEquipements implements DeleteInterface {
     @Override
     public String delete(Integer id) throws Exception {
         try{
-            sql = "DELETE FROM Agents where Code = ?";
+            sql = "DELETE FROM Equipements where address_MAC = ?";
             pst = connection.prepareStatement(sql);
             pst.setString(1,equipement.getAddress_MAC());
             pst.executeUpdate();
