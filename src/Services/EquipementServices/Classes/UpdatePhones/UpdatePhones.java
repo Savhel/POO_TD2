@@ -1,39 +1,45 @@
 package Services.EquipementServices.Classes.UpdatePhones;
 
-import Models.MaterielsModel;
+
 import Models.PhonesModel;
-import Models.UsersModel;
 import Services.DatabaseServices.DatabaseConnection;
-import Services.EquipementServices.Interfaces.UpdateStateInterface.UpdateStateInterface;
+import Services.EquipementServices.Interfaces.UpdateInterfaces.UpdateInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UpdatePhones implements UpdateStateInterface {
+public class UpdatePhones implements UpdateInterface {
 
     Connection connection;
-    PhonesModel phone;
+    PhonesModel p;
     PreparedStatement pst;
     ResultSet rsl;
     String sql;
 
-    public UpdatePhones(PhonesModel phone) {
-        this.phone = phone;
+    public UpdatePhones(PhonesModel p){
+        this.p=p;
         connection = DatabaseConnection.getInstance().getConnection();
     }
 
     @Override
-    public String UpdateState(String IMEI) throws Exception {
-        String requete="UPDATE Phones SET etat_Materiel = ? WHERE IMEI=?";
+    public void UpdateMaterial(){
+        String requete="UPDATE Equipements SET IdProprietaire=?,Couleur=?,etat_Materiel=?,Nom=?,Marque=?,Modele=?,memoire_ROM=?,memoire_RAM=?,numero_serie=? WHERE IMEI=?";
         try(PreparedStatement stmt=connection.prepareStatement(requete)){
-            stmt.setString(2,IMEI);
-            stmt.setString(1,"retrouvé");
+            stmt.setString(10,p.getIMEI());
+            stmt.setInt(1,p.getIdProprietaire());
+            stmt.setString(3,p.getCouleur());
+            stmt.setString(2,p.getEtat_Materiel());
+            stmt.setString(4,p.getNom());
+            stmt.setString(5,p.getMarque());
+            stmt.setString(6,p.getModele());
+            stmt.setFloat(7,p.getMemoire_ROM());
+            stmt.setFloat(8,p.getMemoire_RAM());
+            stmt.setString(9,p.getNumero_serie());
             stmt.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return "";
     }
 }
