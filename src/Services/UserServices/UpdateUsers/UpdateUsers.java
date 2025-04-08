@@ -21,10 +21,10 @@ public class UpdateUsers {
     }
 
 
-    public void InsertionUser(){
+    public void InsertionUser(Integer id){
         String requete="UPDATE Users SET nom=?,prenom=?,email=?,numtel=?,address=? WHERE id_user=?";
         try(PreparedStatement stmt=connection.prepareStatement(requete)){
-            stmt.setInt(6,user.getId());
+            stmt.setInt(6,id);
             stmt.setString(1,user.getNom());
             stmt.setString(2,user.getPrenom());
             stmt.setString(3,user.getEmail());
