@@ -10,8 +10,8 @@ public class DatabaseConnection {
 
     // Configuration de la base de données
     private final String URL = "jdbc:mysql://localhost:3306/TP2";
-    private final String USER = "jordan";
-    private final String PASSWORD = "123456";
+    private final String USER = "root";
+    private final String PASSWORD = "12345";
 
     // Constructeur privé
     public DatabaseConnection() {

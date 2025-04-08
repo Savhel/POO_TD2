@@ -29,7 +29,7 @@ public class UpdateEquipementsState implements UpdateStateInterface {
     public String UpdateState(String Mac) throws Exception {
         String requete="UPDATE Equipements SET etat_Materiel = ? WHERE address_MAC=?";
         try(PreparedStatement stmt=connection.prepareStatement(requete)){
-            stmt.setInt(2,Mac);
+            stmt.setString(2,Mac);
             stmt.setString(1,"retrouvé");
             stmt.executeUpdate();
         }catch (SQLException e){

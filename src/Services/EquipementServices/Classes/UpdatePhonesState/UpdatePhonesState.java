@@ -1,4 +1,4 @@
-package Services.EquipementServices.Classes.UpdatePhones;
+package Services.EquipementServices.Classes.UpdatePhonesState;
 
 import Models.MaterielsModel;
 import Models.PhonesModel;

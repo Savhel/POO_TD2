@@ -22,14 +22,14 @@ public class InsertionUsers {
 
 
     public void InsertionUser(){
-        String requete="INSERT INTO Users (id_user,nom,prenom,email,numtel,address) values (?,?,?,?,?,?)";
+        String requete="INSERT INTO Users (nom,prenom,email,numtel,address) values (?,?,?,?,?)";
         try(PreparedStatement stmt=connection.prepareStatement(requete)){
-            stmt.setInt(1,user.getId());
-            stmt.setString(2,user.getNom());
-            stmt.setString(3,user.getPrenom());
-            stmt.setString(4,user.getEmail());
-            stmt.setString(5,user.getNumtel());
-            stmt.setString(6,user.getAddress());
+//            stmt.setInt(1,user.getId());
+            stmt.setString(1,user.getNom());
+            stmt.setString(2,user.getPrenom());
+            stmt.setString(3,user.getEmail());
+            stmt.setString(4,user.getNumtel());
+            stmt.setString(5,user.getAddress());
             stmt.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

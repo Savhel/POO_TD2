@@ -4,7 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import java.net.InetSocketAddress;
 import java.io.IOException;
 import java.io.OutputStream;
-import controller.UserController;
+import Controller.UserController;
 
 // Supprimez cet import statique qui n'est pas approprié
 // import static java.sql.DriverManager.println;
@@ -20,15 +20,25 @@ public class App {
             String path = exchange.getRequestURI().getPath();
             String method = exchange.getRequestMethod();
 
-            // Route POST /api/persons
-            if ("POST".equals(method) && "/api/persons/{id}".equals(path)) {
+            // Route GET /api/persons/{id}
+            if ("GET".equals(method) && path.matches("/api/persons/\\d+")) {
                 UserController.getUser.handle(exchange);
+                System.out.println("GET " + path);
+            }
+            // Route POST /api/persons
+            else if ("POST".equals(method) && "/api/persons".equals(path)) {
+                UserController.createUser.handle(exchange);
                 System.out.println("POST /api/persons");
             }
-            // Route POST /api/tasks
-            else if ("POST".equals(method) && "/api/tasks".equals(path)) {
-//                taskController.createTask.handle(exchange);
-                System.out.println("POST /api/tasks");
+            // Route DELETE /api/persons/{id}
+            else if ("DELETE".equals(method) && path.matches("/api/persons/\\d+")) {
+                UserController.deleteUser.handle(exchange);
+                System.out.println("DELETE " + path);
+            }
+            // Route PUT /api/persons/{id} (for updating user data)
+            else if ("PUT".equals(method) && path.matches("/api/persons/\\d+")) {
+                UserController.updateUser.handle(exchange);
+                System.out.println("PUT " + path);
             }
             // Route non trouvée
             else {
