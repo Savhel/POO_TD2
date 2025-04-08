@@ -23,7 +23,7 @@ public class DeleteUsers {
         try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             
-            pstmt.setInt(1, user.getId());
+            pstmt.setInt(1, id);
             
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
