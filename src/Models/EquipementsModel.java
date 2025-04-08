@@ -8,7 +8,7 @@ public class EquipementsModel extends MaterielsModel{
 
 
 
-    public EquipementsModel(String address_MAC) {
+    public EquipementsModel() {
         this.address_MAC = address_MAC;
     }
 

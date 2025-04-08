@@ -37,14 +37,14 @@ public class ReadEquipements implements ReadInterface {
 
             // Parcours des résultats et création des objets EquipementsModel
             while (rsl.next()) {
-                EquipementsModel equipementsModel = new EquipementsModel();
+                EquipementsModel equipementsModel = new EquipementsModel();//modif
                 equipementsModel.setAddress_MAC(rsl.getString("address_MAC"));
                 equipementsModel.setNom(rsl.getString("nom"));
                 equipementsModel.setModele(rsl.getString("Modele"));
                 equipementsModel.setMemoire_ROM(rsl.getFloat("Memoire_ROM"));
                 equipementsModel.setMemoire_RAM(rsl.getFloat("Memoire_RAM"));
                 equipementsModel.setNumero_serie(rsl.getString("Memoire_serie"));
-                equipementsModel.setIdPropretaire(rsl.getInt("IdPropiétaire"));
+                equipementsModel.setIdProprietaire(rsl.getInt("IdPropiétaire"));//modif
                 equipementsModel.setCouleur(rsl.getString("Couleur"));
                 equipementsModel.setEtat_Materiel(rsl.getString("Etat_Matériel"));
 

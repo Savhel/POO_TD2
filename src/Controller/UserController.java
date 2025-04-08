@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import Models.UsersModel;
 import com.sun.net.httpserver.HttpExchange;
@@ -18,7 +18,7 @@ public class UserController {
             String name = params[0].split("=")[1];
             int age = Integer.parseInt(params[1].split("=")[1]);
 
-//            User User = UserService.createUser(name, age);
+//            User = UserService.createUser(name, age);
             sendResponse(exchange, 201, "Created: ");
         } else {
             sendResponse(exchange, 405, "Method Not Allowed");

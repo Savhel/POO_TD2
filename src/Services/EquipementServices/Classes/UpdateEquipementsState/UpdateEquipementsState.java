@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static java.lang.Integer.*;
+
 public class UpdateEquipementsState implements UpdateStateInterface {
 
     Connection connection;
@@ -29,7 +31,7 @@ public class UpdateEquipementsState implements UpdateStateInterface {
     public String UpdateState(String Mac) throws Exception {
         String requete="UPDATE Equipements SET etat_Materiel = ? WHERE address_MAC=?";
         try(PreparedStatement stmt=connection.prepareStatement(requete)){
-            stmt.setInt(2,Mac);
+            stmt.setInt(2, parseInt(Mac));//modif du  cast
             stmt.setString(1,"retrouvé");
             stmt.executeUpdate();
         }catch (SQLException e){

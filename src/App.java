@@ -4,7 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import java.net.InetSocketAddress;
 import java.io.IOException;
 import java.io.OutputStream;
-import controller.UserController;
+import Controller.UserController;
 
 // Supprimez cet import statique qui n'est pas approprié
 // import static java.sql.DriverManager.println;
@@ -24,7 +24,7 @@ public class App {
             if ("POST".equals(method) && "/api/persons/{id}".equals(path)) {
                 UserController.getUser.handle(exchange);
                 System.out.println("POST /api/persons");
-            }
+            }  
             // Route POST /api/tasks
             else if ("POST".equals(method) && "/api/tasks".equals(path)) {
 //                taskController.createTask.handle(exchange);
