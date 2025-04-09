@@ -1,6 +1,11 @@
 package Controller;
 
 import Models.EquipementsModel;
+import Services.EquipementServices.Classes.DeleteEquipements.DeleteEquipements;
+import Services.EquipementServices.Classes.InsertionEquipements.InsertionEquipements;
+import Services.EquipementServices.Classes.ReadEquipements.ReadEquipements;
+import Services.EquipementServices.Classes.UpdateEquipements.UpdateEquipements;
+import Services.EquipementServices.Classes.UpdateEquipementsState.UpdateEquipementsState;
 import Services.Utils.ResultSetToJson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -35,8 +40,8 @@ public class equipementController {
                             case "Nom" -> equipment.setNom(value);
                             case "Marque" -> equipment.setMarque(value);
                             case "Modele" -> equipment.setModele(value);
-                            case "memoire_ROM" -> equipment.setMemoire_ROM(Float.parseFloat(value));
-                            case "memoire_RAM" -> equipment.setMemoire_RAM(Float.parseFloat(value));
+                            case "memoire_ROM" -> equipment.setMemoire_ROM(Integer.parseInt(value));
+                            case "memoire_RAM" -> equipment.setMemoire_RAM(Integer.parseInt(value));
                             case "numero_serie" -> equipment.setNumero_serie(value);
                             case "IdProprietaire" -> equipment.setIdPropretaire(Integer.parseInt(value));
                             case "Couleur" -> equipment.setCouleur(value);
@@ -48,7 +53,7 @@ public class equipementController {
                 }
                 
                 // Insérer l'équipement dans la base de données
-                boolean success = equipment.save();
+                boolean success = new InsertionEquipements(equipment).Insertion();
                 
                 if (success) {
                     // Créer une réponse JSON avec les données de l'équipement
@@ -73,10 +78,12 @@ public class equipementController {
     
     // Handler pour récupérer tous les équipements
     public static HttpHandler getAllEquipments = exchange -> {
+        String[] path = exchange.getRequestURI().getPath().split("/");
+        int id = Integer.parseInt(path[path.length - 1]);
         if ("GET".equals(exchange.getRequestMethod())) {
             try {
                 EquipementsModel equipmentModel = new EquipementsModel();
-                ResultSet equipments = equipmentModel.getAll();
+                ResultSet equipments = new ReadEquipements(equipmentModel).read(id);
                 
                 String jsonResponse = ResultSetToJson.equipmentsResultSetToJson(equipments);
                 sendResponse(exchange, 200, jsonResponse);
@@ -99,7 +106,7 @@ public class equipementController {
                 EquipementsModel equipmentModel = new EquipementsModel();
                 equipmentModel.setAddress_MAC(macAddress);
 
-                ResultSet equipment = equipmentModel.getByMAC();
+                ResultSet equipment = new ReadEquipements(equipmentModel).getByMAC();
                 
                 String jsonResponse = ResultSetToJson.equipmentsResultSetToJson(equipment);
                 if (jsonResponse.equals("[]")) {
@@ -126,7 +133,7 @@ public class equipementController {
                 EquipementsModel equipmentModel = new EquipementsModel();
                 System.out.println(macAddress);
                 equipmentModel.setAddress_MAC(macAddress);
-                ResultSet equipment = equipmentModel.getByMAC();
+                ResultSet equipment = new ReadEquipements(equipmentModel).getByMAC();
                 
                 String jsonResponse = ResultSetToJson.equipmentsResultSetToJson(equipment);
                 if (jsonResponse.equals("[]")) {
@@ -170,7 +177,7 @@ public class equipementController {
                 EquipementsModel equipmentModel = new EquipementsModel();
                 equipmentModel.setAddress_MAC(macAddress);
                 equipmentModel.setEtat_Materiel(newStatus);
-                boolean success = equipmentModel.updateStatus();
+                boolean success = new UpdateEquipementsState(equipmentModel).UpdateState();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Statut de l'équipement mis à jour avec succès\"}");
@@ -210,8 +217,8 @@ public class equipementController {
                             case "Nom" -> equipment.setNom(value);
                             case "Marque" -> equipment.setMarque(value);
                             case "Modele" -> equipment.setModele(value);
-                            case "memoire_ROM" -> equipment.setMemoire_ROM(Float.parseFloat(value));
-                            case "memoire_RAM" -> equipment.setMemoire_RAM(Float.parseFloat(value));
+                            case "memoire_ROM" -> equipment.setMemoire_ROM(Integer.parseInt(value));
+                            case "memoire_RAM" -> equipment.setMemoire_RAM(Integer.parseInt(value));
                             case "numero_serie" -> equipment.setNumero_serie(value);
                             case "IdProprietaire" -> equipment.setIdPropretaire(Integer.parseInt(value));
                             case "Couleur" -> equipment.setCouleur(value);
@@ -221,7 +228,7 @@ public class equipementController {
                     }
                 }
                 
-                boolean success = equipment.update();
+                boolean success = new UpdateEquipements(equipment).UpdateMaterial();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Équipement mis à jour avec succès\"}");
@@ -246,7 +253,7 @@ public class equipementController {
                 
                 EquipementsModel equipmentModel = new EquipementsModel();
                 equipmentModel.setAddress_MAC(macAddress);
-                boolean success = equipmentModel.delete();
+                boolean success = new DeleteEquipements(equipmentModel).delete();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Équipement supprimé avec succès\"}");

@@ -9,21 +9,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InsertionUsers {
-    Connection connection;
     UsersModel user;
-    PreparedStatement pst;
-    ResultSet rsl;
-    String sql;
 
     public InsertionUsers(UsersModel user){
         this.user=user;
-        connection = DatabaseConnection.getInstance().getConnection();
     }
 
 
     public int InsertionUser(){
         String requete="INSERT INTO Users (nom,prenom,email,password,numtel,address) values (?,?,?,?,?,?)";
-        try(PreparedStatement stmt=connection.prepareStatement(requete, PreparedStatement.RETURN_GENERATED_KEYS)){
+        try(Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement stmt=connection.prepareStatement(requete, PreparedStatement.RETURN_GENERATED_KEYS)){
 //            stmt.setInt(1,user.getId());
             stmt.setString(1,user.getNom());
             stmt.setString(2,user.getPrenom());

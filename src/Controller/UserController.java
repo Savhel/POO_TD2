@@ -28,18 +28,45 @@ public class UserController {
                 String[] params = requestBody.split("&");
                 String email = decode(params[0].split("=")[1], StandardCharsets.UTF_8);
                 String password = decode(params[1].split("=")[1], StandardCharsets.UTF_8);
-                
-                // Appeler le service pour authentifier l'utilisateur
+
+
                 ReadUsers readUsers = new ReadUsers();
-                ResultSet userResult = readUsers.login(email, password);
-                
-                // Convertir le résultat en JSON
-                String jsonResponse = ResultSetToJson.usersResultSetToJson(userResult);
+                String jsonResponse = readUsers.login(email, password);
+
                 
                 // Vérifier si un utilisateur a été trouvé
-                if (jsonResponse.equals("[]")) {
+                if (jsonResponse == null) {
                     sendResponse(exchange, 401, "{\"error\": \"Email ou mot de passe incorrect\"}");
                 } else {
+                    System.out.println(jsonResponse == null);
+                    sendResponse(exchange, 200, jsonResponse);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendResponse(exchange, 500, "{\"error\": \"" + e.getMessage() + "\"}");
+            }
+        } else {
+            sendResponse(exchange, 405, "{\"error\": \"Method Not Allowed\"}");
+        }
+    };
+
+    public static HttpHandler getGetUserUser = exchange -> {
+        if ("POST".equals(exchange.getRequestMethod())) {
+            try {
+                // Lire et parser le corps de la requête
+                String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                String[] params = requestBody.split("&");
+                String id = decode(params[0].split("=")[1], StandardCharsets.UTF_8);
+
+                ReadUsers readUsers = new ReadUsers();
+                String jsonResponse = readUsers.getUser(id);
+
+
+                // Vérifier si un utilisateur a été trouvé
+                if (jsonResponse == null) {
+                    sendResponse(exchange, 401, "{\"error\": \"Email ou mot de passe incorrect\"}");
+                } else {
+                    System.out.println(jsonResponse == null);
                     sendResponse(exchange, 200, jsonResponse);
                 }
             } catch (Exception e) {
@@ -100,8 +127,7 @@ public class UserController {
             ReadUsers readUsers = new ReadUsers();
             String jsonResponse = "";
             try {
-                ResultSet user = readUsers.read(id);
-                jsonResponse = ResultSetToJson.usersResultSetToJson(user);
+                jsonResponse = readUsers.read(id);
 
             } catch (Exception e) {
                 System.out.println(STR."erreur : \{e.getMessage()}");

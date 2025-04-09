@@ -1,6 +1,11 @@
 package Controller;
 
 import Models.PhonesModel;
+import Services.EquipementServices.Classes.DeletePhones.DeletePhones;
+import Services.EquipementServices.Classes.InsertionPhones.InsertionPhones;
+import Services.EquipementServices.Classes.ReadPhones.ReadPhones;
+import Services.EquipementServices.Classes.UpdatePhones.UpdatePhones;
+import Services.EquipementServices.Classes.UpdatePhonesState.UpdatePhonesState;
 import Services.Utils.ResultSetToJson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -36,8 +41,8 @@ public class PhoneController {
                             case "Nom" -> phone.setNom(value);
                             case "Marque" -> phone.setMarque(value);
                             case "Modele" -> phone.setModele(value);
-                            case "memoire_ROM" -> phone.setMemoire_ROM(Float.parseFloat(value));
-                            case "memoire_RAM" -> phone.setMemoire_RAM(Float.parseFloat(value));
+                            case "memoire_ROM" -> phone.setMemoire_ROM(Integer.parseInt(value));
+                            case "memoire_RAM" -> phone.setMemoire_RAM(Integer.parseInt(value));
                             case "numero_serie" -> phone.setNumero_serie(value);
                             case "IdProprietaire" -> phone.setIdPropretaire(Integer.parseInt(value));
                             case "Couleur" -> phone.setCouleur(value);
@@ -49,7 +54,7 @@ public class PhoneController {
                 }
                 
                 // Insérer le téléphone dans la base de données
-                boolean success = phone.save();
+                boolean success = new InsertionPhones(phone).Insertion();
                 
                 if (success) {
                     // Créer une réponse JSON avec les données du téléphone
@@ -74,10 +79,12 @@ public class PhoneController {
     
     // Handler pour récupérer tous les téléphones
     public static HttpHandler getAllPhones = exchange -> {
+        String[] path = exchange.getRequestURI().getPath().split("/");
+        int id = Integer.parseInt(path[path.length - 1]);
         if ("GET".equals(exchange.getRequestMethod())) {
             try {
                 PhonesModel phoneModel = new PhonesModel();
-                ResultSet phones = phoneModel.getAll();
+                ResultSet phones = new ReadPhones(phoneModel).read(id);
                 
                 String jsonResponse = ResultSetToJson.phonesResultSetToJson(phones);
                 sendResponse(exchange, 200, jsonResponse);
@@ -99,7 +106,7 @@ public class PhoneController {
                 System.out.println(exchange.getRequestURI().getPath());
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei.split("=")[1]);
-                ResultSet phone = phoneModel.getByIMEI();
+                ResultSet phone = new ReadPhones(phoneModel).getByIMEI();
                 
                 String jsonResponse = ResultSetToJson.phonesResultSetToJson(phone);
 
@@ -126,7 +133,7 @@ public class PhoneController {
                 
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei);
-                ResultSet phone = phoneModel.getByIMEI();
+                ResultSet phone =  new ReadPhones(phoneModel).getByIMEI();
 
                 
                 String jsonResponse = ResultSetToJson.phonesResultSetToJson(phone);
@@ -172,7 +179,7 @@ public class PhoneController {
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei);
                 phoneModel.setEtat_Materiel(newStatus);
-                boolean success = phoneModel.updateStatus();
+                boolean success = new UpdatePhonesState(phoneModel).UpdateState();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Statut du téléphone mis à jour avec succès\"}");
@@ -212,8 +219,8 @@ public class PhoneController {
                             case "Nom" -> phone.setNom(value);
                             case "Marque" -> phone.setMarque(value);
                             case "Modele" -> phone.setModele(value);
-                            case "memoire_ROM" -> phone.setMemoire_ROM(Float.parseFloat(value));
-                            case "memoire_RAM" -> phone.setMemoire_RAM(Float.parseFloat(value));
+                            case "memoire_ROM" -> phone.setMemoire_ROM(Integer.parseInt(value));
+                            case "memoire_RAM" -> phone.setMemoire_RAM(Integer.parseInt(value));
                             case "numero_serie" -> phone.setNumero_serie(value);
                             case "IdProprietaire" -> phone.setIdPropretaire(Integer.parseInt(value));
                             case "Couleur" -> phone.setCouleur(value);
@@ -223,7 +230,7 @@ public class PhoneController {
                     }
                 }
                 
-                boolean success = phone.update();
+                boolean success = new UpdatePhones(phone).UpdateMaterial();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Téléphone mis à jour avec succès\"}");
@@ -248,7 +255,7 @@ public class PhoneController {
                 
                 PhonesModel phoneModel = new PhonesModel();
                 phoneModel.setIMEI(imei);
-                boolean success = phoneModel.delete();
+                boolean success = new DeletePhones(phoneModel).delete();
                 
                 if (success) {
                     sendResponse(exchange, 200, "{\"success\": true, \"message\": \"Téléphone supprimé avec succès\"}");

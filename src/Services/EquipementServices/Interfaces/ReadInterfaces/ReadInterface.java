@@ -1,8 +1,9 @@
 package Services.EquipementServices.Interfaces.ReadInterfaces;
 
-import java.sql.ResultSet;
-import java.util.List;
+import Models.MaterielsModel;
 
-public interface ReadInterface {
-   List read(Integer id) throws Exception;
+import java.sql.ResultSet;
+
+public interface ReadInterface<T extends MaterielsModel> {
+   ResultSet read(Integer id) throws Exception;
 }

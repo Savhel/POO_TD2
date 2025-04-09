@@ -32,6 +32,15 @@ public class DatabaseConnection {
 
     // Récupérer la connexion
     public Connection getConnection() {
+        try {
+            // Vérifier si la connexion est fermée ou nulle, et la recréer si nécessaire
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la vérification ou recréation de la connexion");
+        }
         return connection;
     }
 
@@ -43,19 +52,6 @@ public class DatabaseConnection {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) throws SQLException {
-        Connection conn = DatabaseConnection.getInstance().getConnection();
-        String query = "SELECT * FROM Phones WHERE IMEI = ?";
-        PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, "45123");
-//        System.out.println("emie: " );
-        ResultSet rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            System.out.println("emie: " + rs.getString("nom"));
         }
     }
 }

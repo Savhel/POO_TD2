@@ -11,35 +11,36 @@ import java.sql.SQLException;
 
 public class InsertionEquipements implements InsertionInterface {
 
-    Connection connection ;
-    EquipementsModel equipement;
-    PreparedStatement pst;
-    ResultSet rsl;
-    String sql;
+    private EquipementsModel equipement;
 
     public InsertionEquipements(EquipementsModel equipement) {
         this.equipement = equipement;
-        connection = DatabaseConnection.getInstance().getConnection();
     }
 
     @Override
-    public void Insertion() throws SQLException {
+    public boolean Insertion() throws SQLException {
 
-        String requet = "insert into Equipements(address_MAC,IdProprietaire,etat_Materiel,Nom,Marque,Modele,memoire_ROM,memoi_RAM,numero_serie) values (?,?,?,?,?,?,?,?,?)";
-        try (PreparedStatement stmt = DatabaseConnection.getInstance().getConnection().prepareStatement(requet)) {
-            stmt.setString(1,equipement.getAddress_MAC());
-            stmt.setInt(2,equipement.getIdProprietaire());
-            stmt.setString(3,equipement.getCouleur());
-            stmt.setString(4,equipement.getEtat_Materiel());
-            stmt.setString(5,equipement.getNom());
-            stmt.setString(6,equipement.getMarque());
-            stmt.setString(7,equipement.getModele());
-            stmt.setFloat(8,equipement.getMemoire_ROM());
-            stmt.setFloat(9,equipement.getMemoire_RAM());
-            stmt.setString(10,equipement.getNumero_serie());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-                ex.printStackTrace();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
+            String query = "INSERT INTO Equipements (address_MAC, IdProprietaire, etat_Materiel, Couleur, Nom, Marque, Modele, memoire_ROM, memoire_RAM, numero_serie, photoUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, equipement.getAddress_MAC());
+            pstmt.setInt(2, equipement.getIdProprietaire());
+            pstmt.setString(3, equipement.getEtat_Materiel());
+            pstmt.setString(4, equipement.getCouleur());
+            pstmt.setString(5, equipement.getNom());
+            pstmt.setString(6, equipement.getMarque());
+            pstmt.setString(7, equipement.getModele());
+            pstmt.setFloat(8, equipement.getMemoire_ROM());
+            pstmt.setFloat(9, equipement.getMemoire_RAM());
+            pstmt.setString(10, equipement.getNumero_serie());
+            pstmt.setString(11, equipement.getPhotoUrl());
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
+
 }

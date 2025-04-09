@@ -22,8 +22,8 @@ CREATE TABLE Phones (
     Nom VARCHAR(100),
     Marque VARCHAR(100),
     Modele VARCHAR(100),
-    memoire_ROM FLOAT,
-    memoire_RAM FLOAT,
+    memoire_ROM INT,
+    memoire_RAM INT,
     numero_serie VARCHAR(100) UNIQUE,
     photoUrl VARCHAR(255)
 );
@@ -37,8 +37,8 @@ CREATE TABLE Equipements (
     Nom VARCHAR(100),
     Marque VARCHAR(100),
     Modele VARCHAR(100),
-    memoire_ROM FLOAT,
-    memoire_RAM FLOAT,
+    memoire_ROM INT,
+    memoire_RAM INT,
     numero_serie VARCHAR(100) UNIQUE,
     photoUrl VARCHAR(255)
 );
